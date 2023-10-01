@@ -3,18 +3,6 @@ import { useEffect, useState, useLayoutEffect } from "react";
 // 🟢 1. Stopwatch 컴포넌트 ( Timer 컴포넌트의 부모)
 const Stopwatch = () => {
   const [isDisp, setIsDisp] = useState(true);  // 화면의 표시 상태를 관리
-
-  return (
-    <>
-      {isDisp && <Timer />} {/* isDisp이 true이면 Timer 컴포넌트를 보이게 */}
-      <button onClick={() => setIsDisp(prev => !prev)}>{isDisp ? "非表示" : "表示"}</button>  {/* isDisp이 true이면 非表示 표시 , false이면 表示 표시 */}
-    </>
-  )
-}
-
-
-// 🟢 2. Timer 컴포넌트 (Stopwatch 컴포넌트의 자식)
-const Timer = () => {
   const [time, setTime] = useState(0); // 현재 측정 시간 관리
   const [isRunning, setIsRunning] = useState(false);  // 스탑워치가 실행되고 있는지 관리
 
@@ -67,6 +55,18 @@ const Timer = () => {
     }
 
   }
+  return (
+    <>
+      {isDisp && <Timer time={time} toggle={toggle} reset={reset} isRunning={isRunning}/>} {/* isDisp이 true이면 Timer 컴포넌트를 보이게 */}
+      <button onClick={() => setIsDisp(prev => !prev)}>{isDisp ? "非表示" : "表示"}</button>  {/* isDisp이 true이면 非表示 표시 , false이면 表示 표시 */}
+    </>
+  )
+}
+
+
+// 🟢 2. Timer 컴포넌트 (Stopwatch 컴포넌트의 자식)
+const Timer = ({ time,toggle,reset,isRunning }) => {
+  
 
   return (
     <>
